@@ -14,15 +14,18 @@ const milUniElement = document.getElementById('milUni');
 const splitsElement = document.getElementById('splits');
 
 function printTime() {
-  // ... your code goes here
+  printMinutes()
+  printSeconds()
 }
 
 function printMinutes() {
-  // ... your code goes here
+  minDecElement.innerHTML = Math.floor(chronometer.getMinutes() / 10)
+  minUniElement.innerHTML = Math.floor(chronometer.getMinutes() % 10)
 }
 
 function printSeconds() {
-  // ... your code goes here
+  secDecElement.innerHTML = Math.floor(chronometer.getSeconds() / 10)
+  secUniElement.innerHTML = Math.floor(chronometer.getSeconds() % 10)
 }
 
 // ==> BONUS
@@ -56,10 +59,43 @@ function setResetBtn() {
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
-  // ... your code goes here
+  const classesLeft = btnLeftElement.classList
+  const classesRight = btnRightElement.classList
+  const result = classesLeft.toggle('stop')
+  classesLeft.toggle('start')
+  classesRight.toggle('split')
+  classesRight.toggle('reset')
+
+  if(result) {
+    btnLeftElement.innerHTML = 'STOP'
+    btnRightElement.innerHTML = 'SPLIT'
+    chronometer.start(printTime)
+  } else {
+    btnLeftElement.innerHTML = 'START'
+    btnRightElement.innerHTML = 'RESET'
+    chronometer.stop()
+  }
 });
 
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
-  // ... your code goes here
+  const classesRight = btnRightElement.classList
+  if (classesRight.contains('reset')) {
+    chronometer.reset()
+    minDecElement.innerHTML = 0
+    minUniElement.innerHTML = 0
+    secDecElement.innerHTML = 0
+    secUniElement.innerHTML = 0
+
+  } else {
+    chronometer.split()
+  }
 });
+
+function updateScreen() {
+  console.log('testing updateScreen')
+  minDecElement.innerHTML = Math.floor(chronometer.getMinutes() / 10)
+  minUniElement.innerHTML = Math.floor(chronometer.getMinutes() % 10)
+  secDecElement.innerHTML = Math.floor(chronometer.getSeconds() / 10)
+  secUniElement.innerHTML = Math.floor(chronometer.getSeconds() % 10)
+}
