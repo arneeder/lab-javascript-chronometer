@@ -35,10 +35,15 @@ function printMilliseconds() {
 
 function printSplit() {
   // ... your code goes here
+  // REALLY
+  splitsElement.appendChild(document.createElement('li'))
+  splitsElement.lastChild.innerHTML = chronometer.split()
 }
 
 function clearSplits() {
   // ... your code goes here
+  // REALLY
+  splitsElement.innerHTML = ''
 }
 
 function setStopBtn() {
@@ -82,20 +87,13 @@ btnRightElement.addEventListener('click', () => {
   const classesRight = btnRightElement.classList
   if (classesRight.contains('reset')) {
     chronometer.reset()
+    clearSplits()
     minDecElement.innerHTML = 0
     minUniElement.innerHTML = 0
     secDecElement.innerHTML = 0
     secUniElement.innerHTML = 0
 
   } else {
-    chronometer.split()
+    printSplit()
   }
 });
-
-function updateScreen() {
-  console.log('testing updateScreen')
-  minDecElement.innerHTML = Math.floor(chronometer.getMinutes() / 10)
-  minUniElement.innerHTML = Math.floor(chronometer.getMinutes() % 10)
-  secDecElement.innerHTML = Math.floor(chronometer.getSeconds() / 10)
-  secUniElement.innerHTML = Math.floor(chronometer.getSeconds() % 10)
-}

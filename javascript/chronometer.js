@@ -5,12 +5,14 @@ class Chronometer {
   }
 
   start(callback) {
+    this.currentTime += 1
     this.intervalId =setInterval(() => {
       if (callback !== undefined) {
         callback()
       }
-      this.currentTime += 1
       console.log(this.currentTime)
+      this.currentTime += 1
+      
     }, 1000)
   }
 
